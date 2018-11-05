@@ -14,6 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        \Validator::extend('invalid email', function($attribute, $value, $parameters, $validator) {
+            $allowedEmailDomains = ['diu.edu.bd'];
+            return in_array( explode('@', $parameters[0])[1] , $allowedEmailDomains);
+        });
+
+        
         Schema::defaultStringLength(191);
     }
 
